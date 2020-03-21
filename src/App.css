@@ -36,12 +36,8 @@ body > div {
 
 .App {
   text-align: center;
-  box-shadow: 0px 0px 0px 2px black;
   max-width: 414px;
-  min-height: 736px;
-  height: 736px;
-  max-height: 736px;
-  overflow: hidden;
+  /* padding: 0 15px; */
   margin: auto;
   display: block;
   width: 100%;
@@ -55,15 +51,22 @@ body > div {
 .dev-button {
   position: fixed;
   bottom: 50px;
-  
+  left: 50px;
+  appearance: none;
+  background: red;
+  padding: 10px 30px;
+  color: white;
+  font-family: monospace;
+  font-weight: 600;
+  font-size: larger;
 }
 
 
 .drawer-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   pointer-events:none;
-  width: 100%;
+  width: 414px;
   height: 100%;
 }
 
@@ -77,11 +80,11 @@ body > div {
 }
 
 .drawer {
-  position: absolute;
+  position: fixed;
   top: 0;
   transform: translateY(100%);
   z-index: 10;
-  width: 100%;
+  width: 414px;
   height: auto;
 
   background: white;
@@ -102,5 +105,14 @@ body > div {
 
 .drawer-container.open .drawer {
   transform: translateY(20%);
-  transition: transform 0.4s 0.4s cubic-bezier(0.420, 0.000, 0.475, 1.315);
+  transition: transform 0.4s 0.125s cubic-bezier(0.420, 0.000, 0.475, 1.315);
+}
+
+.drawer-handle-icon {
+  width: 80px;
+  height: 4px;
+  border-radius: 20px;
+  background: #ccc;
+  display: block;
+  margin: 12px auto 16px;
 }

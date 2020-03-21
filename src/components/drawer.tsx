@@ -1,32 +1,38 @@
 import React, { Fragment, useRef, useState, useEffect, useLayoutEffect } from 'react';
 
+
 const Drawer = () => {
     const [ isOpen, setIsOpen ] = useState(false);
     const [ currentYPos, setCurrentYPos ] = useState({
         y: 0
     });
 
-    const [ drawerContentHeight ] = useState(0);
+    const [ drawerContentHeight, setDrawerContentHeight ] = useState(0);
     
     const drawerEl = useRef<HTMLDivElement>(null);
-    const drawerContentEl = useRef(null);
+    const drawerContentEl = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        
-        // console.log(typeof (drawerEl));
-        // console.log(typeof (drawerEl.current));
-        // console.log(drawerContentEl);
-    });
+    let offsetY: number
+
+    // useEffect(() => {
+    //     document.addEventListener('scroll', handleScroll, true);
+    // })
 
     useLayoutEffect(() => {
         if (null !== drawerEl.current) {
-            console.log(drawerEl.current.offsetHeight);
+            setDrawerContentHeight(drawerEl.current.offsetHeight);
         }
-    })
-      
+    }, [])
+
+
+    const handleScroll = (e:Object) => {
+        // console.log('yes, scrolling');
+        console.log(e.deltaY);
+    }
 
     const handleTriggerDrawer = (e:Object) => {
         setIsOpen(!isOpen);
+        isOpen ? document.body.style.overflow = "" : document.body.style.overflow = "hidden"
 
         // if (null !== drawerEl.current) {
         //     console.log(drawerEl.current.offsetHeight);
@@ -34,7 +40,7 @@ const Drawer = () => {
     }
 
     const handleMouseDown = (e:Object) => {
-        // console.log("clicked!");
+        console.log("clicked the drawer!");
     }
 
     const getHeight = (e:Event) => {
@@ -47,6 +53,7 @@ const Drawer = () => {
             {/* Main Wrapper */}
             <div
                 ref={drawerEl}
+                onWheel={handleScroll}
                 className={ isOpen ? 'drawer-container open' : 'drawer-container'}
             >
                 {/* Main Drawer Content */}
@@ -54,10 +61,10 @@ const Drawer = () => {
                 <div
                     className="drawer"
                     ref={drawerContentEl}
-                    onClick={handleMouseDown}>
-                    <span>Hello from Drawer!</span>
-
-                    <button onClick={() => console.log("clicked!")}>Click</button>
+                    onMouseDown={handleMouseDown}
+                    // style={{transform: `translateY(120px)`}}
+                    >
+                    <span className="drawer-handle-icon"></span>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et scelerisque nisl. Vestibulum sem nibh, rhoncus ut consectetur non, consequat eget metus. Suspendisse quam purus, laoreet nec ligula id, malesuada malesuada purus. Praesent consectetur mi vitae ante sollicitudin, in scelerisque odio laoreet. Curabitur odio erat, auctor nec enim non, ullamcorper consequat nulla. Curabitur luctus mollis nisl, et pulvinar enim sagittis at. Sed diam risus, accumsan sed posuere sit amet, ultricies id velit. Sed scelerisque ex quis imperdiet ultricies. Pellentesque pellentesque purus sit amet fringilla elementum. Aenean pulvinar urna nec elit pharetra, eu bibendum sem malesuada. Sed semper laoreet nunc ut feugiat. Donec dignissim ex pulvinar, volutpat nulla eu, tincidunt metus. Suspendisse sit amet sapien odio. Mauris eu neque dui. Curabitur pharetra lorem sem, eget sollicitudin lorem consequat sed. Quisque faucibus ex eget tellus porta, quis dictum elit dapibus.
                     </p>
