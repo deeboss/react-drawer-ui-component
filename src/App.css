@@ -104,7 +104,7 @@ body > div {
 }
 
 .drawer-container.open .drawer {
-  transform: translateY(20%);
+  /* transform: translateY(120px); */
   transition: transform 0.4s 0.125s cubic-bezier(0.420, 0.000, 0.475, 1.315);
 }
 

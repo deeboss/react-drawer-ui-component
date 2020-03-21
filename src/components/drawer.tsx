@@ -3,16 +3,17 @@ import React, { Fragment, useRef, useState, useEffect, useLayoutEffect } from 'r
 
 const Drawer = () => {
     const [ isOpen, setIsOpen ] = useState(false);
-    const [ currentYPos, setCurrentYPos ] = useState({
-        y: 0
+    const [ yCoordinates, setYCoordinates ] = useState({
+        current: 120,
+        min: 0,
+        max: 0
     });
+
 
     const [ drawerContentHeight, setDrawerContentHeight ] = useState(0);
     
     const drawerEl = useRef<HTMLDivElement>(null);
     const drawerContentEl = useRef<HTMLDivElement>(null);
-
-    let offsetY: number
 
     // useEffect(() => {
     //     document.addEventListener('scroll', handleScroll, true);
@@ -22,11 +23,23 @@ const Drawer = () => {
         if (null !== drawerEl.current) {
             setDrawerContentHeight(drawerEl.current.offsetHeight);
         }
+
+        if (null !== drawerContentEl.current) {
+            setYCoordinates({...yCoordinates, max: drawerContentEl.current.offsetHeight});
+        }
     }, [])
 
 
     const handleScroll = (e:any) => {
+        console.log(yCoordinates);
         console.log(e.deltaY);
+
+        if (e.deltaY > 0) {
+            console.log('scrolling down');
+        } else {
+            console.log('scrolling up');
+        }
+        // let newY = yCoordinates.current:number
     }
 
     const handleTriggerDrawer = (e:Object) => {
@@ -57,7 +70,7 @@ const Drawer = () => {
                     className="drawer"
                     ref={drawerContentEl}
                     onMouseDown={handleMouseDown}
-                    // style={{transform: `translateY(120px)`}}
+                    style={ { transform: isOpen ? `translateY(${yCoordinates.current}px)` : 'translateY(100%)' } }  
                     >
                     <span className="drawer-handle-icon"></span>
                     <p>
