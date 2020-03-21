@@ -15,30 +15,37 @@ const Drawer = () => {
     const drawerEl = useRef<HTMLDivElement>(null);
     const drawerContentEl = useRef<HTMLDivElement>(null);
 
-    // useEffect(() => {
-    //     document.addEventListener('scroll', handleScroll, true);
-    // })
+    useEffect(() => {
+        // console.log('info:');
+        // console.log(yCoordinates.max);
+    })
 
     useLayoutEffect(() => {
-        if (null !== drawerEl.current) {
+        if (null !== drawerEl.current && null !== drawerContentEl.current) {
             setDrawerContentHeight(drawerEl.current.offsetHeight);
+            setYCoordinates({...yCoordinates, max: drawerEl.current.offsetHeight - drawerContentEl.current.offsetHeight});
         }
-
-        // if (null !== drawerContentEl.current) {
-        //     setYCoordinates({...yCoordinates, max: drawerContentEl.current.offsetHeight});
-        // }
     }, [])
 
 
+
     const handleScroll = (e:any) => {
-        // console.log(yCoordinates);
-        // console.log(e.deltaY);
-        console.log("yeoe")
+        console.log(yCoordinates);
+        console.log(e.deltaY);
 
         if (e.deltaY > 0) {
-            // console.log('scrolling down');
+            console.log('scrolling down');
+            // console.log(yCoordinates.current + e.deltaY);
+            if ((yCoordinates.current + e.deltaY) > yCoordinates.max) {
+                console.log("max!!");
+                setYCoordinates({...yCoordinates, current: yCoordinates.max})
+            } else {
+                setYCoordinates({...yCoordinates, current: yCoordinates.current + e.deltaY})
+            }
         } else {
-            // console.log('scrolling up');
+            console.log('scrolling up');
+            setYCoordinates({...yCoordinates, current: yCoordinates.current - e.deltaY})
+            // console.log(yCoordinates.current + e.deltaY);
         }
         // let newY = yCoordinates.current:number
     }
@@ -70,7 +77,7 @@ const Drawer = () => {
                 <div
                     className="drawer"
                     ref={drawerContentEl}
-                    // style={ { transform: isOpen ? `translateY(${yCoordinates.current}px)` : 'translateY(100%)' } }  
+                    style={ { transform: isOpen ? `translateY(${yCoordinates.current}px)` : 'translateY(100%)' } }  
                     onMouseDown={handleMouseDown}
                     >
                     <span className="drawer-handle-icon"></span>
