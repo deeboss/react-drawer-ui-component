@@ -25,8 +25,7 @@ const Drawer = () => {
     }, [])
 
 
-    const handleScroll = (e:Object) => {
-        // console.log('yes, scrolling');
+    const handleScroll = (e:any) => {
         console.log(e.deltaY);
     }
 
@@ -41,10 +40,6 @@ const Drawer = () => {
 
     const handleMouseDown = (e:Object) => {
         console.log("clicked the drawer!");
-    }
-
-    const getHeight = (e:Event) => {
-        console.log('hello getHeight');
     }
     
     return (
