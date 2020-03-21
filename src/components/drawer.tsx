@@ -85,62 +85,11 @@ const Drawer = () => {
                     onMouseDown={handleMouseDown}
                     >
                     <span className="drawer-handle-icon"></span>
+                    {/* <ul> {testObjects.map((object:string,i:number)=>{ return <li>{object}</li> })} </ul> */}
                     <ul>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
-                        <li>Last of my kind</li>
+                        {Array.from(Array(40), (e, i) => {
+                            return <li key={i}>List item {i + 1}</li>
+                        })}
                     </ul>
                 </div>
             </div>
