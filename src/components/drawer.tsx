@@ -48,10 +48,19 @@ const Drawer = () => {
             }
         } else {
             // User is scrolling up
+
+
             
             if ((yCoordinates.current - e.deltaY) > yCoordinates.minVisible) {
                 console.log("Upper limit reached");
                 setYCoordinates({...yCoordinates, current: yCoordinates.minVisible});
+
+                // If they keep scrolling even further, dismiss the drawer
+                if (Math.abs(e.deltaY) > yCoordinates.minVisible) {
+                    console.log('Dismissing drawer');
+                    setIsOpen(!isOpen);
+                }
+
             } else {
                 setYCoordinates({...yCoordinates, current: yCoordinates.current - e.deltaY});
             }
