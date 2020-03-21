@@ -105,7 +105,7 @@ body > div {
 
 .drawer-container.open .drawer {
   /* transform: translateY(120px); */
-  transition: transform 0.4s 0.125s cubic-bezier(0.420, 0.000, 0.475, 1.315);
+  transition: transform 0.4s ease-in-out;
 }
 
 .drawer-handle-icon {
@@ -115,4 +115,13 @@ body > div {
   background: #ccc;
   display: block;
   margin: 12px auto 16px;
+}
+
+
+.drawer ul li {
+  padding: 8px;
+}
+
+.drawer ul li:last-of-type {
+  background: #96ff96;
 }

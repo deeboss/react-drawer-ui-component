@@ -6,7 +6,9 @@ const Drawer = () => {
     const [ yCoordinates, setYCoordinates ] = useState({
         current: 120,
         min: 0,
-        max: 0
+        max: 0,
+        minVisible: 0,
+        windowMax: 0
     });
 
 
@@ -17,50 +19,52 @@ const Drawer = () => {
 
     useEffect(() => {
         // console.log('info:');
-        // console.log(yCoordinates.max);
+        // console.log(yCoordinates);
     })
 
     useLayoutEffect(() => {
         if (null !== drawerEl.current && null !== drawerContentEl.current) {
             setDrawerContentHeight(drawerEl.current.offsetHeight);
-            setYCoordinates({...yCoordinates, max: drawerEl.current.offsetHeight - drawerContentEl.current.offsetHeight});
+            setYCoordinates({
+                ...yCoordinates,
+                windowMax: drawerEl.current.offsetHeight,
+                max: drawerEl.current.offsetHeight - drawerContentEl.current.offsetHeight,
+                minVisible: drawerEl.current.offsetHeight * 0.6
+            });
         }
     }, [])
 
 
 
     const handleScroll = (e:any) => {
-        console.log(yCoordinates);
-        console.log(e.deltaY);
 
         if (e.deltaY > 0) {
-            console.log('scrolling down');
-            // console.log(yCoordinates.current + e.deltaY);
+            // User is scrolling down
             if ((yCoordinates.current + e.deltaY) > yCoordinates.max) {
-                console.log("max!!");
+                console.log("Lower limit reac3hed");
                 setYCoordinates({...yCoordinates, current: yCoordinates.max})
             } else {
                 setYCoordinates({...yCoordinates, current: yCoordinates.current + e.deltaY})
             }
         } else {
-            console.log('scrolling up');
-            setYCoordinates({...yCoordinates, current: yCoordinates.current - e.deltaY})
-            // console.log(yCoordinates.current + e.deltaY);
+            // User is scrolling up
+            
+            if ((yCoordinates.current - e.deltaY) > yCoordinates.minVisible) {
+                console.log("Upper limit reached");
+                setYCoordinates({...yCoordinates, current: yCoordinates.minVisible});
+            } else {
+                setYCoordinates({...yCoordinates, current: yCoordinates.current - e.deltaY});
+            }
         }
-        // let newY = yCoordinates.current:number
     }
 
     const handleTriggerDrawer = (e:Object) => {
         setIsOpen(!isOpen);
         isOpen ? document.body.style.overflow = "" : document.body.style.overflow = "hidden"
-
-        // if (null !== drawerEl.current) {
-        //     console.log(drawerEl.current.offsetHeight);
-        // }
     }
 
     const handleMouseDown = (e:Object) => {
-        console.log("clicked the drawer!");
+        // console.log("clicked the drawer!");
     }
     
     return (
@@ -77,7 +81,7 @@ const Drawer = () => {
                 <div
                     className="drawer"
                     ref={drawerContentEl}
-                    style={ { transform: isOpen ? `translateY(${yCoordinates.current}px)` : 'translateY(100%)' } }  
+                    style={ { transform: isOpen ? `translateY(${yCoordinates.current}px)` : `translateY(${yCoordinates.windowMax}px)` } }  
                     onMouseDown={handleMouseDown}
                     >
                     <span className="drawer-handle-icon"></span>
@@ -136,7 +140,7 @@ const Drawer = () => {
                         <li>This is drawer content!</li>
                         <li>This is drawer content!</li>
                         <li>This is drawer content!</li>
-                        <li>This is drawer content!</li>
+                        <li>Last of my kind</li>
                     </ul>
                 </div>
             </div>
