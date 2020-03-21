@@ -1,38 +1,106 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  overflow-x: hidden;
+
+  margin: 0;
+  font-size: 100%;
+  font-family: -apple-system, BlinkMacSystemFont,
+  'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans',
+  'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: #edf5ff;
+}
+
+body > div {
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+}
+
 .App {
   text-align: center;
+  box-shadow: 0px 0px 0px 2px black;
+  max-width: 414px;
+  min-height: 736px;
+  height: 736px;
+  max-height: 736px;
+  overflow: hidden;
+  margin: auto;
+  display: block;
+  width: 100%;
+  text-align: center;
+  /* padding: 3em 20px; */
+  background: white;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.dev-button {
+  position: fixed;
+  bottom: 50px;
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.drawer-container {
+  position: absolute;
+  top: 0;
+  pointer-events:none;
+  width: 100%;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.drawer-background {
+  background: rgba(0,0,0,.42);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.drawer {
+  position: absolute;
+  top: 0;
+  transform: translateY(100%);
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+
+  background: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  transition: transform 0.4s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.drawer-container.open {
+  pointer-events:all;
+}
+
+.drawer-container.open .drawer-background {
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.drawer-container.open .drawer {
+  transform: translateY(20%);
+  transition: transform 0.4s 0.4s cubic-bezier(0.420, 0.000, 0.475, 1.315);
 }
