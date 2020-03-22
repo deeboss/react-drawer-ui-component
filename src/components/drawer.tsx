@@ -34,6 +34,9 @@ const Drawer = () => {
         }
     }, [])
 
+    const handleTouchMove = (e:any) => {
+        console.log(e.touches[0].clientY);
+    }
 
 
     const handleScroll = (e:any) => {
@@ -73,7 +76,7 @@ const Drawer = () => {
     }
 
     const handleMouseDown = (e:Object) => {
-        // console.log("clicked the drawer!");
+        console.log("clicked the drawer!");
     }
     
     return (
@@ -92,9 +95,9 @@ const Drawer = () => {
                     ref={drawerContentEl}
                     style={ { transform: isOpen ? `translateY(${yCoordinates.current}px)` : `translateY(${yCoordinates.windowMax}px)` } }  
                     onMouseDown={handleMouseDown}
+                    onTouchMoveCapture={handleTouchMove}
                     >
                     <span className="drawer-handle-icon"></span>
-                    {/* <ul> {testObjects.map((object:string,i:number)=>{ return <li>{object}</li> })} </ul> */}
                     <ul>
                         {Array.from(Array(40), (e, i) => {
                             return <li key={i}>List item {i + 1}</li>
